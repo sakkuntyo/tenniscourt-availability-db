@@ -6,4 +6,4 @@
 - POSTGRES_DB=<database name>
 
 # table schema
-refs [init sql](./init/01_schema.sql)
+refs [init](./init/01_schema.sql)
