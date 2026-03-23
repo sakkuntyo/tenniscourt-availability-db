@@ -6,7 +6,7 @@
 
 # table schema
 
-refs [init](./init/01_schema.sql)
+[`init/01_schema.sql`](./init/01_schema.sql)
 
 # sample app
 
