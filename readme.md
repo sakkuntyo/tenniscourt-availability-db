@@ -1,6 +1,5 @@
 # required args
 - PG_MAJOR=18
-- PGDATA=/var/lib/postgresql/18/docker
 - POSTGRES_PASSWORD=<password>
 - POSTGRES_USER=<user id>
 - POSTGRES_DB=<database name>
