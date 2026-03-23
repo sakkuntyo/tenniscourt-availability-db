@@ -33,10 +33,10 @@ jobs:
           schema = schema_path.read_text(encoding="utf-8").rstrip()
       
           replacement = f"""<!-- schema:start -->
-```sql
-{schema}
-```
-<!-- schema:end -->"""
+          ```sql
+          {schema}
+          ```
+          <!-- schema:end -->"""
 
           new_readme, count = re.subn(
               r"<!-- schema:start -->.*?<!-- schema:end -->",
