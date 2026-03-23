@@ -4,6 +4,7 @@ on:
   push:
     branches: [main]
     paths:
+      - "README.md"
       - "init/01_schema.sql"
       - ".github/workflows/embed-schema.yml"
   workflow_dispatch:
@@ -18,36 +19,35 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
       - name: Update README block from SQL file
         shell: bash
         run: |
           python <<'PY'
           from pathlib import Path
           import re
-
+      
           readme_path = Path("README.md")
           schema_path = Path("init/01_schema.sql")
-
+      
           readme = readme_path.read_text(encoding="utf-8")
           schema = schema_path.read_text(encoding="utf-8").rstrip()
-
+      
           replacement = f"""<!-- schema:start -->
-          ```sql
-          {schema}
-          ```
-          <!-- schema:end -->"""
+```sql
+{schema}
+```
+<!-- schema:end -->"""
 
-          new_readme = re.sub(
+          new_readme, count = re.subn(
               r"<!-- schema:start -->.*?<!-- schema:end -->",
               replacement,
               readme,
               flags=re.S,
           )
-
-          if new_readme == readme:
+          
+          if count == 0:
               raise SystemExit("Markers not found in README.md")
-
+          
           readme_path.write_text(new_readme, encoding="utf-8")
           PY
 
