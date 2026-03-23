@@ -46,7 +46,7 @@ jobs:
           )
 
           if new_readme == readme:
-              raise SystemExit("Markers not found in README.md")
+              raise SystemExit("Markers not found in readme.md")
 
           readme_path.write_text(new_readme, encoding="utf-8")
           PY
@@ -55,7 +55,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add README.md
+          git add readme.md
           git diff --cached --quiet || git commit -m "Update README schema block"
 
       - name: Push changes
