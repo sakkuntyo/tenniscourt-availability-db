@@ -8,3 +8,8 @@
 # table schema
 
 refs [init](./init/01_schema.sql)
+
+# sample app
+
+- https://github.com/sakkuntyo/ace-tenniscourt-logger
+- https://github.com/sakkuntyo/ichikawa-tenniscourt-logger
