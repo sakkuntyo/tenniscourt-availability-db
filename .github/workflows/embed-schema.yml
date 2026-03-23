@@ -26,7 +26,7 @@ jobs:
           from pathlib import Path
           import re
 
-          readme_path = Path("README.md")
+          readme_path = Path("readme.md")
           schema_path = Path("init/01_schema.sql")
 
           readme = readme_path.read_text(encoding="utf-8")
