@@ -1,0 +1,62 @@
+name: Embed schema into README
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "init/01_schema.sql"
+      - ".github/workflows/embed-schema.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Update README block from SQL file
+        shell: bash
+        run: |
+          python <<'PY'
+          from pathlib import Path
+          import re
+
+          readme_path = Path("README.md")
+          schema_path = Path("init/01_schema.sql")
+
+          readme = readme_path.read_text(encoding="utf-8")
+          schema = schema_path.read_text(encoding="utf-8").rstrip()
+
+          replacement = f"""<!-- schema:start -->
+          ```sql
+          {schema}
+          ```
+          <!-- schema:end -->"""
+
+          new_readme = re.sub(
+              r"<!-- schema:start -->.*?<!-- schema:end -->",
+              replacement,
+              readme,
+              flags=re.S,
+          )
+
+          if new_readme == readme:
+              raise SystemExit("Markers not found in README.md")
+
+          readme_path.write_text(new_readme, encoding="utf-8")
+          PY
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git diff --cached --quiet || git commit -m "Update README schema block"
+
+      - name: Push changes
+        run: git push
