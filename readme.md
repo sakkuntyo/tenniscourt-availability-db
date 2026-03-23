@@ -7,6 +7,10 @@
 # table schema
 
 [`init/01_schema.sql`](./init/01_schema.sql)
+<!-- schema:start -->
+```sql
+loading...
+```
 
 # sample app
 
