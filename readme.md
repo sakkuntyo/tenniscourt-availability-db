@@ -11,6 +11,7 @@
 ```sql
 loading...
 ```
+<!-- schema:end -->
 
 # sample app
 
