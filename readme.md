@@ -7,4 +7,4 @@
 
 # table schema
 
-[init](./init/01_schema.sql)
+refs [init](./init/01_schema.sql)
